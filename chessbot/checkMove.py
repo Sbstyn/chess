@@ -6,6 +6,8 @@
 #queen      Q       q
 #king       K       k
 
+import settable
+
 def moveChecker(toPlace, fromPlace, id):
     if id == "R" or id == "r":
         return isRookValid(toPlace, fromPlace)
@@ -19,6 +21,12 @@ def moveChecker(toPlace, fromPlace, id):
         return isKingValid(toPlace, fromPlace)
     if id == "N" or id == "n":
         return isKnightValid(toPlace, fromPlace)
+
+"""def kingmoves(n):
+    if n == -1:
+        return allkingmoves
+    else:
+        allkingmoves = n"""
 
 def knightEdgeCheck(f,t):
     for x in range(1, 9):
@@ -34,7 +42,6 @@ def knightEdgeCheck(f,t):
         return xf
     else:
         return 8 - xf + 1
-
 
 def isKnightValid(toPlace, fromPlace):
     if toPlace == fromPlace - 2 + 8 or toPlace == fromPlace - 2 - 8:
@@ -54,11 +61,14 @@ def isKnightValid(toPlace, fromPlace):
 def isKingValid(toPlace, fromPlace):
     if fromPlace - toPlace == 9 or  fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
         if rookEdgeCheck(t=toPlace,f=fromPlace) > 1:
+            settable.kingmoves[0] += 1
             return True
     if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
         if rookEdgeCheck(t=toPlace,f=fromPlace) > 1:
+            settable.kingmoves[0] += 1
             return True
     if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
+        settable.kingmoves[0] += 1
         return True
     return False
 

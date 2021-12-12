@@ -1,11 +1,15 @@
 import matrix
+
+kingmoves = [0]
+
 def settable(st):
+    kingmoves[0] = 0
     st = str(st)
     if st == "set":
         st = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
     elif st == "clear":
         st = "8" * 8
-
+        
     while "/" in st:
         st = st.replace("/", "")
 

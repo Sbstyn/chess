@@ -21,6 +21,9 @@ def getInput():
             matrix.board[matrix.idboard.index(pos2)] = id
         else:
             print("MoveNotLegal")
+
+    print(settable.kingmoves[0])
+    
     matrix.pBoard()
     getInput()
 
