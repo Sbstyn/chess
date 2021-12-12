@@ -10,5 +10,6 @@
 
 inv(["a", "b", "c", "d", "e", "f", "g", "h"])"""
 
-for i in range(1, 2):
-    print (i)
+for i in range(1, 65):
+    if i % 7 == 0 and i % 9 == 0:
+        print(i)

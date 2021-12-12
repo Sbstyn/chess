@@ -14,7 +14,25 @@ def moveChecker(toPlace, fromPlace, id):
     if id == "P" or id == "p":
         return isPawnVaild(toPlace, fromPlace, id)
     if id == "Q" or id == "q":
-        return isQueenValid(fromPlace, toPlace)
+        return isQueenValid(toPlace, fromPlace)
+    if id == "K" or id == "k":
+        return isKingValid(toPlace, fromPlace)
+    if id == "N" or id == "n":
+        return isKnightValid(toPlace, fromPlace)
+
+def isKnightValid(toPlace, fromPlace):
+    print()
+
+def isKingValid(toPlace, fromPlace):
+    if fromPlace - toPlace == 9 or  fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
+        if rookEdgeCheck(t=toPlace,f=fromPlace) > 1:
+            return True
+    if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
+        if rookEdgeCheck(t=toPlace,f=fromPlace) > 1:
+            return True
+    if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
+        return True
+    return False
 
 def isQueenValid(toPlace, fromPlace):
     if isRookValid(fromPlace=fromPlace, toPlace=toPlace) == True:
@@ -43,13 +61,13 @@ def isPawnVaild(toPlace, fromPlace, id):
 
 def rookEdgeCheck(f, t):
     if(t>f):
-        for x in range(1, 8):
+        for x in range(1, 9):
             for y in range(0, 8):
                 if(f == x + y * 8):
                     print(8 - x + 1)
                     return 8 - x + 1
     else:
-        for x in range(1, 8):
+        for x in range(1, 9):
             for y in range(0, 8):
                 if(f == x + y * 8):
                     print(x)
@@ -74,14 +92,25 @@ def isRookValid(toPlace, fromPlace):
 
 def bishopEdgeCheck(f, t):
     print(f"/7 {(f - t) % 7}, /9 {(f - t) % 9}")
+    if((f - t) % 7 == 0 and (f - t) % 9 == 0):
+        print("-1")
+        for x in range(1, 9):
+            for y in range(0, 8):
+                if(f == x + y * 8):
+                    print(x + y * 8)
+                    print(f"able to move: {8 - x + 1}")
+                    return 8 - x + 1
+    
     if(((f - t) % 7 == 0 and t > f) or ((f - t) % 9 == 0 and t < f)):
-        for x in range(1, 8):
+        print("0")
+        for x in range(1, 9):
             for y in range(0, 8):
                 if(f == x + y * 8):
                     print(x)
                     return x
     else:
-        for x in range(1, 8):
+        print("1")
+        for x in range(1, 9):
             for y in range(0, 8):
                 if(f == x + y * 8):
                     print(x + y * 8)
