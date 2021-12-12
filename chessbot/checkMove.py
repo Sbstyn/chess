@@ -31,10 +31,8 @@ def knightEdgeCheck(f,t):
                 xt = x
 
     if xf > xt:
-        #print(f"{x}")
         return xf
     else:
-        print(8 - xf + 1)
         return 8 - xf + 1
 
 

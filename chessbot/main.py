@@ -1,12 +1,15 @@
 import checkMove
 import matrix
+import settable
 
 aray = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
 def getInput():
     i = input()
 
-    if(len(i) == 4):
+    if i[0] == "-":
+        settable.settable(i[1:])
+    elif(len(i) == 4):
         pos1 = aray.index(i[0]) + 1 + (56 - 8 * (int(i[1]) - 1))
         pos2 = aray.index(i[2]) + 1 + (56 - 8 * (int(i[3]) - 1))
         

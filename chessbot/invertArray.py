@@ -10,6 +10,12 @@
 
 inv(["a", "b", "c", "d", "e", "f", "g", "h"])"""
 
-for i in range(1, 65):
-    if i % 7 == 0 and i % 9 == 0:
-        print(i)
+
+st = "asd4dsa"
+for i in range(1, len(st)):
+    try:
+        int(st[i])
+        st = st.replace(st[i], "0" * int(st[i]))
+        print(st)
+    except:
+        print("-", end="")
