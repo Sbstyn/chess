@@ -20,8 +20,38 @@ def moveChecker(toPlace, fromPlace, id):
     if id == "N" or id == "n":
         return isKnightValid(toPlace, fromPlace)
 
+def knightEdgeCheck(f,t):
+    for x in range(1, 9):
+        for y in range(0, 8):
+            if f == x + y * 8:
+                xf = x
+    for x in range(1, 9):
+        for y in range(0, 8):
+            if t == x + y * 8:
+                xt = x
+
+    if xf > xt:
+        #print(f"{x}")
+        return xf
+    else:
+        print(8 - xf + 1)
+        return 8 - xf + 1
+
+
 def isKnightValid(toPlace, fromPlace):
-    print()
+    if toPlace == fromPlace - 2 + 8 or toPlace == fromPlace - 2 - 8:
+        if knightEdgeCheck(f=fromPlace, t=toPlace) > 2:
+            return True
+    if toPlace == fromPlace - 16 + 1 or toPlace == fromPlace - 16 - 1:
+        if knightEdgeCheck(f=fromPlace, t=toPlace) > 2:
+            return True
+    if toPlace == fromPlace + 2 + 8 or toPlace == fromPlace + 2 - 8:
+        if knightEdgeCheck(f=fromPlace, t=toPlace) > 1:
+            return True
+    if toPlace == fromPlace + 16 + 1 or toPlace == fromPlace + 16 - 1:
+        if knightEdgeCheck(f=fromPlace, t=toPlace) > 1:
+            return True
+    return False
 
 def isKingValid(toPlace, fromPlace):
     if fromPlace - toPlace == 9 or  fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
