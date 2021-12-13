@@ -15,9 +15,9 @@ def getInput():
         
         id = matrix.board[matrix.idboard.index(pos1)]
         print(f"{id}, {pos1}, {pos2}")
-        if(checkMove.moveChecker(fromPlace=pos1, toPlace=pos2, id=id) == True):
+        if(pos1 != pos2 and checkMove.moveChecker(fromPlace=pos1, toPlace=pos2, id=id) == True):
             print(f"{id}, {pos1}, {pos2}")
-            matrix.board[matrix.idboard.index(pos1)] = 0
+            matrix.board[matrix.idboard.index(pos1)] = "."
             matrix.board[matrix.idboard.index(pos2)] = id
         else:
             print("MoveNotLegal")

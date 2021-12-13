@@ -13,17 +13,23 @@ def settable(st):
     while "/" in st:
         st = st.replace("/", "")
 
+    baseSt = ""
+    for i in st:
+        baseSt += i
+
     print(st)
+    n = ""
     for a in range(0, len(st)):
-        try:
-            int(st[a])
+        if st[a].isnumeric():
             if int(st[a]) != 0:
-                st = st.replace(st[a], "0" * int(st[a]))
-        except:
+                n += "0" * int(st[a])
+        else:
             print("-", end="")
-    print()
-    for i in range(0,len(st)):
-        matrix.board[i] = st[i]
+            n += st[a]
+
+    print(f"\n{n}")
+    for i in range(0,len(n)):
+        matrix.board[i] = n[i]
     #matrix.pBoard()
 
 
