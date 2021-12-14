@@ -7,6 +7,7 @@
 #king       K       k
 
 import settable
+import matrix
 
 def moveChecker(toPlace, fromPlace, id):
     if id == "R" or id == "r":
@@ -84,6 +85,12 @@ def isQueenValid(toPlace, fromPlace):
 def isPawnVaild(toPlace, fromPlace, id):
     if id == "P":
         if(fromPlace - toPlace == 8):
+            if matrix.board[toPlace] == ".":
+                print(matrix.board[toPlace])
+                return True
+            else:
+                return False
+        if (fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace] != ".":
             return True
         for x in range(0, 8):
             if(fromPlace == 49 + x and fromPlace - toPlace == 16):
