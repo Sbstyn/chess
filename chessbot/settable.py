@@ -7,29 +7,56 @@ def settable(st):
     st = str(st)
     if st == "set":
         st = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+    elif st == "fen":
+        zer = False
+        z = 0
+        a = ""
+        x = 1
+        for m in matrix.board:
+            if m == "0" or m == ".":
+                zer = True
+                z += 1
+            else:
+                if zer == True:
+                    zer = False
+                    a += str(z)
+                    z = 0
+                a += m
+            if x % 8 == 0:
+                if z != 0:
+                    a += str(z)
+                    z = 0
+                    zer = False
+                a += "/"
+            
+            x += 1
+        print(a)
+        
     elif st == "clear":
         st = "8" * 8
         
-    while "/" in st:
-        st = st.replace("/", "")
+    elif st[0] == "x":
+        st = st[1:]
+        while "/" in st:
+            st = st.replace("/", "")
 
-    baseSt = ""
-    for i in st:
-        baseSt += i
+        baseSt = ""
+        for i in st:
+            baseSt += i
 
-    print(st)
-    n = ""
-    for a in range(0, len(st)):
-        if st[a].isnumeric():
-            if int(st[a]) != 0:
-                n += "0" * int(st[a])
-        else:
-            print("-", end="")
-            n += st[a]
+        print(st)
+        n = ""
+        for a in range(0, len(st)):
+            if st[a].isnumeric():
+                if int(st[a]) != 0:
+                    n += "0" * int(st[a])
+            else:
+                print("-", end="")
+                n += st[a]
 
-    print(f"\n{n}")
-    for i in range(0,len(n)):
-        matrix.board[i] = n[i]
+        print(f"\n{n}")
+        for i in range(0,len(n)):
+            matrix.board[i] = n[i]
     #matrix.pBoard()
 
 
