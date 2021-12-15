@@ -21,7 +21,20 @@ def getInput():
             matrix.board[matrix.idboard.index(pos2)] = id
         else:
             print("MoveNotLegal")
-    #elif
+    
+    elif len(i) == 5:
+        pos1 = aray.index(i[0]) + 1 + (56 - 8 * (int(i[1]) - 1))
+        pos2 = aray.index(i[2]) + 1 + (56 - 8 * (int(i[3]) - 1))
+        
+        id = matrix.board[matrix.idboard.index(pos1)]
+        if id == "p" or id == "P":
+            print(f"{id}, {pos1}, {pos2}")
+            if(pos1 != pos2 and checkMove.isPawnPromotionVaild(fromPlace=pos1, toPlace=pos2, id=id, n=i[4]) == True):
+                print(f"{id}, {pos1}, {pos2}")
+                matrix.board[matrix.idboard.index(pos1)] = "."
+                matrix.board[matrix.idboard.index(pos2)] = i[4]
+        else:
+            print("MoveNotLegal")
 
     print(settable.kingmoves[0])
     

@@ -82,6 +82,15 @@ def isQueenValid(toPlace, fromPlace):
         return True
     return False
 
+def isPawnPromotionVaild(toPlace, fromPlace, id, n):
+    for x in range(0, 9):
+        if toPlace != 1 + x or toPlace != 1 + x:
+            print(toPlace, False)
+            #ret = False
+    if isPawnVaild(toPlace=toPlace, fromPlace=fromPlace, id=id) == True:
+        return True
+    return False
+
 def isPawnVaild(toPlace, fromPlace, id):
     if id == "P":
         if(fromPlace - toPlace == 8):
