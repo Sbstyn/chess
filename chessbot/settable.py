@@ -6,7 +6,10 @@ def settable(st):
     kingmoves[0] = 0
     st = str(st)
     if st == "set":
+        st = "8" * 8
+        updateBoard(st=st)
         st = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+        updateBoard(st=st)
     elif st == "fen":
         zer = False
         z = 0
@@ -34,18 +37,17 @@ def settable(st):
         
     elif st == "clear":
         st = "8" * 8
+        updateBoard(st=st)
         
     elif st[0] == "x":
         st = st[1:]
-        while "/" in st:
-            st = st.replace("/", "")
-
-        baseSt = ""
-        for i in st:
-            baseSt += i
+        """while "/" in st:
+            st = st.replace("/", "")"""
 
         print(st)
-        n = ""
+
+        updateBoard(st=st)
+        """n = ""
         for a in range(0, len(st)):
             if st[a].isnumeric():
                 if int(st[a]) != 0:
@@ -56,9 +58,24 @@ def settable(st):
 
         print(f"\n{n}")
         for i in range(0,len(n)):
-            matrix.board[i] = n[i]
+            matrix.board[i] = n[i]"""
     #matrix.pBoard()
 
+def updateBoard(st):
+    while "/" in st:
+        st = st.replace("/", "")
+
+    n = ""
+    for a in range(0, len(st)):
+        if st[a].isnumeric():
+            if int(st[a]) != 0:
+                n += "." * int(st[a])
+        else:
+            print("-", end="")
+            n += st[a]
+    print(f"{len(n)} {len(matrix.board)}")
+    for i in range(0,len(n)):
+        matrix.board[i] = n[i]
 
 #settable("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
 #rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
