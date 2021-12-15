@@ -83,35 +83,52 @@ def isQueenValid(toPlace, fromPlace):
     return False
 
 def isPawnPromotionVaild(toPlace, fromPlace, id, n):
+    l = ["N", "Q", "R", "B"]
+    if id == str(id).lower():
+        if str(n).upper() in l:
+            pass
+        else:
+            return False
+    elif id == str(id).upper():
+        if str(n).upper() in l:
+            pass
+        else:
+            return False
+    else:    
+        return False
     for x in range(0, 9):
-        if toPlace != 1 + x or toPlace != 1 + x:
+        if toPlace == 1 + x or toPlace == 57 + x:
             print(toPlace, False)
-            #ret = False
-    if isPawnVaild(toPlace=toPlace, fromPlace=fromPlace, id=id) == True:
-        return True
+            if isPawnVaild(toPlace=toPlace, fromPlace=fromPlace, id=id) == True:
+                return True
     return False
 
 def isPawnVaild(toPlace, fromPlace, id):
     if id == "P":
         if(fromPlace - toPlace == 8):
-            if matrix.board[toPlace] == ".":
-                print(matrix.board[toPlace])
+            if matrix.board[toPlace - 1] == ".":
+                print(matrix.board[toPlace - 1])
                 return True
             else:
                 return False
-        if (fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace] != ".":
+        if (fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace - 1] != ".":
             return True
         for x in range(0, 8):
             if(fromPlace == 49 + x and fromPlace - toPlace == 16):
                 return True
         return False
     if id == "p":
-        if(toPlace - fromPlace == 8):
+        if(fromPlace - toPlace == -8):
+            if matrix.board[toPlace - 1] == ".":
+                print(matrix.board[toPlace - 1])
+                return True
+            else:
+                return False
+        if (fromPlace - toPlace == -7 or fromPlace - toPlace == -9) and matrix.board[toPlace - 1] != ".":
             return True
         for x in range(0, 8):
-            if(fromPlace == 9 + x and toPlace - fromPlace == 16):
+            if(fromPlace == 9 + x and fromPlace - toPlace == -16):
                 return True
-        return False
 
 def rookEdgeCheck(f, t):
     if(t>f):
