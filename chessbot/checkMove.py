@@ -15,7 +15,7 @@ def moveChecker(toPlace, fromPlace, id):
     if id == "B" or id == "b":
         return isBishopValid(toPlace, fromPlace)
     if id == "P" or id == "p":
-        return isPawnVaild(toPlace, fromPlace, id)
+        return isPawnVaild(toPlace, fromPlace, id, n=None)
     if id == "Q" or id == "q":
         return isQueenValid(toPlace, fromPlace)
     if id == "K" or id == "k":
@@ -86,24 +86,29 @@ def isPawnPromotionVaild(toPlace, fromPlace, id, n):
     l = ["N", "Q", "R", "B"]
     if id == str(id).lower():
         if str(n).upper() in l:
-            pass
+            print("l")
         else:
             return False
     elif id == str(id).upper():
-        if str(n).upper() in l:
-            pass
+        if n in l:
+            print("u")
         else:
             return False
     else:    
         return False
-    for x in range(0, 9):
+    for x in range(0, 8):
         if toPlace == 1 + x or toPlace == 57 + x:
-            print(toPlace, False)
-            if isPawnVaild(toPlace=toPlace, fromPlace=fromPlace, id=id) == True:
+            print(toPlace, True)
+            if isPawnVaild(toPlace=toPlace, fromPlace=fromPlace, id=id, n=n) == True:
+                print(True)
                 return True
     return False
 
-def isPawnVaild(toPlace, fromPlace, id):
+def isPawnVaild(toPlace, fromPlace, id, n):
+    if n == None:
+        for x in range(0,8):
+            if toPlace == x + 1 or toPlace == x + 57:
+                return False
     if id == "P":
         if(fromPlace - toPlace == 8):
             if matrix.board[toPlace - 1] == ".":
