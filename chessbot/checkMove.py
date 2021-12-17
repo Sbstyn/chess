@@ -21,7 +21,7 @@ def moveChecker(toPlace, fromPlace, id):
     if id == "K" or id == "k":
         return isKingValid(toPlace, fromPlace)
     if id == "N" or id == "n":
-        return isKnightValid(toPlace, fromPlace)
+        return isKnightValid(toPlace, fromPlace, id)
 
 def knightEdgeCheck(f,t):
     for x in range(1, 9):
@@ -38,19 +38,23 @@ def knightEdgeCheck(f,t):
     else:
         return 8 - xf + 1
 
-def isKnightValid(toPlace, fromPlace):
-    if toPlace == fromPlace - 2 + 8 or toPlace == fromPlace - 2 - 8:
-        if knightEdgeCheck(f=fromPlace, t=toPlace) > 2:
-            return True
-    if toPlace == fromPlace - 16 + 1 or toPlace == fromPlace - 16 - 1:
-        if knightEdgeCheck(f=fromPlace, t=toPlace) > 2:
-            return True
-    if toPlace == fromPlace + 2 + 8 or toPlace == fromPlace + 2 - 8:
-        if knightEdgeCheck(f=fromPlace, t=toPlace) > 1:
-            return True
-    if toPlace == fromPlace + 16 + 1 or toPlace == fromPlace + 16 - 1:
-        if knightEdgeCheck(f=fromPlace, t=toPlace) > 1:
-            return True
+def isKnightValid(toPlace, fromPlace, id):
+    if ((id == str(id).lower() and str(matrix.board[toPlace -1]).lower() == matrix.board[toPlace -1]) or (id == str(id).upper() and str(matrix.board[toPlace -1]).upper() == matrix.board[toPlace -1])) and matrix.board[toPlace -1] != ".":
+        return False
+    else:
+        print(matrix.board[toPlace -1], knightEdgeCheck(f=fromPlace, t=toPlace))
+        if toPlace == fromPlace - 2 + 8 or toPlace == fromPlace - 2 - 8:
+            if knightEdgeCheck(f=fromPlace, t=toPlace) > 2:
+                return True
+        if toPlace == fromPlace - 16 + 1 or toPlace == fromPlace - 16 - 1:
+            if knightEdgeCheck(f=fromPlace, t=toPlace) > 1:
+                return True
+        if toPlace == fromPlace + 2 + 8 or toPlace == fromPlace + 2 - 8:
+            if knightEdgeCheck(f=fromPlace, t=toPlace) > 2:
+                return True
+        if toPlace == fromPlace + 16 + 1 or toPlace == fromPlace + 16 - 1:
+            if knightEdgeCheck(f=fromPlace, t=toPlace) > 1:
+                return True
     return False
 
 def isKingValid(toPlace, fromPlace):
