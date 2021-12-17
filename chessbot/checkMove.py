@@ -11,7 +11,7 @@ import matrix
 
 def moveChecker(toPlace, fromPlace, id):
     if id == "R" or id == "r":
-        return isRookValid(toPlace, fromPlace)
+        return isRookValid(toPlace, fromPlace, id)
     if id == "B" or id == "b":
         return isBishopValid(toPlace, fromPlace)
     if id == "P" or id == "p":
@@ -140,7 +140,7 @@ def rookEdgeCheck(f, t):
         for x in range(1, 9):
             for y in range(0, 8):
                 if(f == x + y * 8):
-                    print(8 - x + 1)
+                    #print(8 - x + 1)
                     return 8 - x + 1
     else:
         for x in range(1, 9):
@@ -150,21 +150,105 @@ def rookEdgeCheck(f, t):
                     return x
     return False
 
-def isRookValid(toPlace, fromPlace):
-    for x in range(1, 8):
-        if(fromPlace + 8 * x == toPlace):
-            return True
-    for x in range(1, 8):
-        if(fromPlace - 8 * x == toPlace):
-            return True
+def isRookValid(toPlace, fromPlace, id):
+    try:
+        for x in range(1, 9):
+            for y in range(0, 8):
+                if(fromPlace == x + y * 8):
+                    fx = x
+        for x in range(1, 9):
+            for y in range(0, 8):
+                if(toPlace == x + y * 8):
+                    tx = x
 
-    for x in range(1, rookEdgeCheck(f=fromPlace, t=toPlace)):
-        if(fromPlace + 1 * x == toPlace):
-            return True
-    for x in range(1, rookEdgeCheck(f=fromPlace, t=toPlace)):
-        if(fromPlace - 1 * x == toPlace):
-            return True
-    return False
+        if tx == fx:
+            if toPlace > fromPlace:
+                for x in range(1, 8):
+                    """if(fromPlace + 8 * x == toPlace):
+                        return True"""
+                    print("+")
+                    if ((id == str(id).lower() and str(matrix.board[fromPlace + 8 * x -1]).lower() == matrix.board[fromPlace + 8 * x -1]) or (id == str(id).upper() and str(matrix.board[fromPlace + 8 * x -1]).upper() == matrix.board[fromPlace + 8 * x -1])) and matrix.board[fromPlace + 8 * x -1] != ".":
+                        print(f"0 {id}, {matrix.board[fromPlace + 8 * x -1]}")
+                        return False
+                    elif matrix.board[fromPlace + 8 * x -1] != ".":
+                        print("a")
+                        #pl = True
+                        if (fromPlace + 8 * x == toPlace):
+                            print("b")
+                            return True
+                        return False
+                    elif (fromPlace + 8 * x == toPlace):
+                        print("b")
+                        return True
+            else:
+                for x in range(1, 8):
+                    print("-")
+                    """if(fromPlace - 8 * x == toPlace):
+                        return True"""
+                    if ((id == str(id).lower() and str(matrix.board[fromPlace - 8 * x -1]).lower() == matrix.board[fromPlace - 8 * x -1]) or (id == str(id).upper() and str(matrix.board[fromPlace - 8 * x -1]).upper() == matrix.board[fromPlace - 8 * x -1])) and matrix.board[fromPlace - 8 * x -1] != ".":
+                        print(f"0 {id}, {matrix.board[fromPlace - 8 * x -1]}")
+                        return False
+                    elif matrix.board[fromPlace - 8 * x -1] != ".":
+                        print("a")
+                        #pl = True
+                        if (fromPlace - 8 * x == toPlace):
+                            print("b")
+                            return True
+                        return False
+                    elif (fromPlace - 8 * x == toPlace):
+                        print("b")
+                        return True
+
+        for x in range(1, rookEdgeCheck(f=fromPlace, t=toPlace)):
+            print(x)
+            """if(fromPlace + 1 * x == toPlace):
+                return True"""
+            if toPlace > fromPlace:
+                print(f"+ {((id == str(id).lower() and str(matrix.board[fromPlace + 1 * x -1]).lower() == matrix.board[fromPlace + 1 * x -1]) or (id == str(id).upper() and str(matrix.board[fromPlace + 1 * x -1]).upper() == matrix.board[fromPlace + 1 * x -1])) and matrix.board[fromPlace + 1 * x -1] != '.'}")
+                print(f"+ {matrix.board[fromPlace + 1 * x -1] != '.'}")
+                print(f"+ {fromPlace + 1 * x == toPlace}")
+                print(f"{matrix.board[fromPlace + 1 * x -1]} {matrix.board[toPlace -1]} {rookEdgeCheck(f=fromPlace, t=toPlace)}")
+                """if pl == True:
+                    print("1")
+                    if (fromPlace + 1 * x == toPlace):
+                        print("b")
+                        return True
+                    return False"""
+                if ((id == str(id).lower() and str(matrix.board[fromPlace + 1 * x -1]).lower() == matrix.board[fromPlace + 1 * x -1]) or (id == str(id).upper() and str(matrix.board[fromPlace + 1 * x -1]).upper() == matrix.board[fromPlace + 1 * x -1])) and matrix.board[fromPlace + 1 * x -1] != ".":
+                    print(f"0 {id}, {matrix.board[fromPlace + 1 * x -1]}")
+                    return False
+                elif matrix.board[fromPlace + 1 * x -1] != ".":
+                    print("a")
+                    #pl = True
+                    if (fromPlace + 1 * x == toPlace):
+                        print("b")
+                        return True
+                    return False
+                elif (fromPlace + 1 * x == toPlace):
+                    print("b")
+                    return True
+            else:
+        #for x in range(1, rookEdgeCheck(f=fromPlace, t=toPlace)):
+                print(f"- {id}, {matrix.board[fromPlace - 1 * x -1]}  {id == str(id).lower() and matrix.board[fromPlace - 1 * x -1].lower} {id == str(id).upper() and matrix.board[fromPlace - 1 * x -1].upper == matrix.board[fromPlace - 1 * x -1]}  {id == str(id).upper()} {str(matrix.board[fromPlace - 1 * x -1]).upper == matrix.board[fromPlace - 1 * x -1]} {matrix.board[fromPlace - 1 * x -1].upper}  {matrix.board[fromPlace - 1 * x -1] != '.'}")
+                print(matrix.board[fromPlace - 1 * x -1])
+                if ((id == str(id).lower() and str(matrix.board[fromPlace - 1 * x -1]).lower() == matrix.board[fromPlace - 1 * x -1]) or (id == str(id).upper() and str(matrix.board[fromPlace - 1 * x -1]).upper() == matrix.board[fromPlace - 1 * x -1])) and matrix.board[fromPlace - 1 * x -1] != ".":
+                    print(f"-0 {id}, {matrix.board[fromPlace - 1 * x -1]}")
+                    return False
+                elif matrix.board[fromPlace - 1 * x -1] != ".":
+                    print("-a")
+                    #pl = True
+                    if (fromPlace - 1 * x == toPlace):
+                        print("-b")
+                        return True
+                    return False
+                elif (fromPlace - 1 * x == toPlace):
+                    print("-b")
+                    return True
+        print("none")
+        return False    
+    except:
+        print("err")
+        return False
 
 def bishopEdgeCheck(f, t):
     print(f"/7 {(f - t) % 7}, /9 {(f - t) % 9}")

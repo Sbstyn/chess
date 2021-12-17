@@ -36,7 +36,7 @@ def getInput():
         else:
             print("MoveNotLegal")
 
-    print(settable.kingmoves[0])
+    #print(settable.kingmoves[0])
     
     matrix.pBoard()
     getInput()
