@@ -19,7 +19,7 @@ def moveChecker(toPlace, fromPlace, id):
     if id == "Q" or id == "q":
         return isQueenValid(toPlace, fromPlace, id)
     if id == "K" or id == "k":
-        return isKingValid(toPlace, fromPlace)
+        return isKingValid(toPlace, fromPlace, id)
     if id == "N" or id == "n":
         return isKnightValid(toPlace, fromPlace, id)
 
@@ -57,19 +57,41 @@ def isKnightValid(toPlace, fromPlace, id):
                 return True
     return False
 
-def isKingValid(toPlace, fromPlace):
-    if fromPlace - toPlace == 9 or  fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
-        if rookEdgeCheck(t=toPlace,f=fromPlace) > 1:
+def kingEdgeCheck(f, t):
+    for x in range(1, 9):
+        for y in range(0, 8):
+            if(f == x + y * 8):
+                fx = x
+    for x in range(1, 9):
+        for y in range(0, 8):
+            if(t == x + y * 8):
+                tx = x
+    if tx > fx:
+        if tx - fx > 1:
+            return 0
+        return 2
+    else:
+        if fx - tx > 1:
+            return 0
+        return 2
+
+def isKingValid(toPlace, fromPlace, id):
+    if ((id == str(id).lower() and str(matrix.board[toPlace -1]).lower() == matrix.board[toPlace -1]) or (id == str(id).upper() and str(matrix.board[toPlace -1]).upper() == matrix.board[toPlace -1])) and matrix.board[toPlace -1] != ".":
+        return False
+    else:
+        print(f"   {kingEdgeCheck(t=toPlace,f=fromPlace)}")
+        if fromPlace - toPlace == 9 or fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
+            if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
+                settable.kingmoves[0] += 1
+                return True
+        if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
+            if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
+                settable.kingmoves[0] += 1
+                return True
+        if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
             settable.kingmoves[0] += 1
             return True
-    if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
-        if rookEdgeCheck(t=toPlace,f=fromPlace) > 1:
-            settable.kingmoves[0] += 1
-            return True
-    if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
-        settable.kingmoves[0] += 1
-        return True
-    return False
+        return False
 
 def isQueenValid(toPlace, fromPlace, id):
     for x in range(1, 9):
