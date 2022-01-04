@@ -141,7 +141,7 @@ def isPawnVaild(toPlace, fromPlace, id, n):
         for x in range(0,8):
             if toPlace == x + 1 or toPlace == x + 57:
                 return False
-    if id == "P":
+    if id == "P" and (matrix.board[toPlace - 1] == "." or matrix.board[toPlace - 1].lower() == matrix.board[toPlace - 1]):
         if(fromPlace - toPlace == 8):
             if matrix.board[toPlace - 1] == ".":
                 print(matrix.board[toPlace - 1])
@@ -154,7 +154,7 @@ def isPawnVaild(toPlace, fromPlace, id, n):
             if(fromPlace == 49 + x and fromPlace - toPlace == 16):
                 return True
         return False
-    if id == "p":
+    if id == "p" and (matrix.board[toPlace - 1] == "." or matrix.board[toPlace - 1].upper() == matrix.board[toPlace - 1]):
         if(fromPlace - toPlace == -8):
             if matrix.board[toPlace - 1] == ".":
                 print(matrix.board[toPlace - 1])
