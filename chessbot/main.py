@@ -2,6 +2,16 @@ import checkMove
 import matrix
 import settable
 
+"""
+rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+r1bqk2r/pppp1ppp/1bn2n2/8/4P3/1NNB4/PPP2PPP/R1BQ1RK1 b kq - 1 1
+r1bq1rk1/pppp1ppp/1bn2n2/8/4P3/1NNB4/PPP2PPP/R1BQ1RK1 w - - 2 2
+rnbqkbnr/pppp2pp/5p2/4p3/4P2P/7R/PPPP1PP1/RNBQKBN1 b Qkq - 1 3
+
+castling
+rnbqk2r/ppppppbp/5np1/8/8/5NP1/PPPPPPBP/RNBQK2R w KQkq - 4 4
+"""
+
 aray = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
 def getInput():

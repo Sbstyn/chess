@@ -11,7 +11,18 @@ import matrix
 
 def moveChecker(toPlace, fromPlace, id):
     if id == "R" or id == "r":
-        return isRookValid(toPlace, fromPlace, id)
+        if isRookValid(toPlace, fromPlace, id):
+            if fromPlace == 1:
+                settable.rookmoves[0] = 1
+            if fromPlace == 8:
+                settable.rookmoves[1] = 1
+            if fromPlace == 57:
+                settable.rookmoves[2] = 1
+            if fromPlace == 64:
+                settable.rookmoves[3] = 1
+            return True
+        else:
+            return False
     if id == "B" or id == "b":
         return isBishopValid(toPlace, fromPlace, id)
     if id == "P" or id == "p":
@@ -76,20 +87,29 @@ def kingEdgeCheck(f, t):
         return 2
 
 def isKingValid(toPlace, fromPlace, id):
+    if id == "K":
+        color = 1
+    else:
+        color = 0
     if ((id == str(id).lower() and str(matrix.board[toPlace -1]).lower() == matrix.board[toPlace -1]) or (id == str(id).upper() and str(matrix.board[toPlace -1]).upper() == matrix.board[toPlace -1])) and matrix.board[toPlace -1] != ".":
         return False
+    elif settable.kingmoves[color] == 0 and toPlace == 63:
+        if settable.rookmoves[3] == 0 and matrix.board[62 - 1] == "." and matrix.board[63 - 1] == ".":
+            matrix.board[64 - 1] = "."
+            matrix.board[62 - 1] = "R"
+            return True
     else:
         print(f"   {kingEdgeCheck(t=toPlace,f=fromPlace)}")
         if fromPlace - toPlace == 9 or fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
             if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
-                settable.kingmoves[0] += 1
+                settable.kingmoves[color] += 1
                 return True
         if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
             if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
-                settable.kingmoves[0] += 1
+                settable.kingmoves[color] += 1
                 return True
         if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
-            settable.kingmoves[0] += 1
+            settable.kingmoves[color] += 1
             return True
         return False
 

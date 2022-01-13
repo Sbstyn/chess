@@ -1,6 +1,9 @@
 import matrix
 
-kingmoves = [0]
+#bw
+kingmoves = [0,0]
+#bl br wl wr
+rookmoves = [0,0,0,0]
 
 def settable(st):
     kingmoves[0] = 0
