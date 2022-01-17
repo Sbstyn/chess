@@ -91,12 +91,32 @@ def isKingValid(toPlace, fromPlace, id):
         color = 1
     else:
         color = 0
+    print(color)
     if ((id == str(id).lower() and str(matrix.board[toPlace -1]).lower() == matrix.board[toPlace -1]) or (id == str(id).upper() and str(matrix.board[toPlace -1]).upper() == matrix.board[toPlace -1])) and matrix.board[toPlace -1] != ".":
         return False
-    elif settable.kingmoves[color] == 0 and toPlace == 63:
-        if settable.rookmoves[3] == 0 and matrix.board[62 - 1] == "." and matrix.board[63 - 1] == ".":
+    elif settable.kingmoves[color] == 0 and color == 1:
+        print("w", end="")
+        if toPlace == 63 and settable.rookmoves[3] == 0 and matrix.board[62 - 1] == "." and matrix.board[63 - 1] == ".":
+            print("s")
             matrix.board[64 - 1] = "."
             matrix.board[62 - 1] = "R"
+            return True
+        if toPlace == 59 and settable.rookmoves[2] == 0 and matrix.board[60 - 1] == "." and matrix.board[59 - 1] == "." and matrix.board[58 - 1] == ".":
+            print("l")
+            matrix.board[57 - 1] = "."
+            matrix.board[60 - 1] = "R"
+            return True
+    elif settable.kingmoves[color] == 0 and color == 0:
+        print("b", end="")
+        if toPlace == 7 and settable.rookmoves[1] == 0 and matrix.board[6 - 1] == "." and matrix.board[7 - 1] == ".":
+            print("s")
+            matrix.board[8 - 1] = "."
+            matrix.board[6 - 1] = "r"
+            return True
+        if toPlace == 3 and settable.rookmoves[0] == 0 and matrix.board[2 - 1] == "." and matrix.board[3 - 1] == "." and matrix.board[4 - 1] == ".":
+            print("l")
+            matrix.board[1 - 1] = "."
+            matrix.board[4 - 1] = "r"
             return True
     else:
         print(f"   {kingEdgeCheck(t=toPlace,f=fromPlace)}")
