@@ -1,5 +1,7 @@
 import matrix
 
+#0:w 1:b
+turn = [0]
 #bw
 kingmoves = [0,0]
 #bl br wl wr
@@ -36,6 +38,24 @@ def settable(st):
                 a += "/"
             
             x += 1
+        a = a[:-1]
+
+        if turn[0] == 1:
+            t = "b"
+        else:
+            t = "w"
+
+        cas = ""
+        if rookmoves[3] == 0:
+            cas += "K"
+        if rookmoves[2] == 0:
+            cas += "Q"
+        if rookmoves[1] == 0:
+            cas += "k"
+        if rookmoves[0] == 0:
+            cas += "q"
+
+        a += f" {t} {cas}"
         print(a)
         
     elif st == "clear":
@@ -44,25 +64,30 @@ def settable(st):
         
     elif st[0] == "x":
         st = st[1:]
-        """while "/" in st:
-            st = st.replace("/", "")"""
 
-        print(st)
+        x = st.split()
+        print(x)
 
-        updateBoard(st=st)
-        """n = ""
-        for a in range(0, len(st)):
-            if st[a].isnumeric():
-                if int(st[a]) != 0:
-                    n += "0" * int(st[a])
-            else:
-                print("-", end="")
-                n += st[a]
+        if(x[1] == "b"):
+            turn[0] = 1
+        else:
+            turn[0] = 0
 
-        print(f"\n{n}")
-        for i in range(0,len(n)):
-            matrix.board[i] = n[i]"""
-    #matrix.pBoard()
+        for i in range(0, 4):
+            rookmoves[i] = 1
+
+        if "q" in x[2]:
+            rookmoves[0] = 0
+        if "k" in x[2]:
+            rookmoves[1] = 0
+        if "Q" in x[2]:
+            rookmoves[2] = 0
+        if "K" in x[2]:
+            rookmoves[3] = 0
+
+        print(f"{x[2]} {st} {rookmoves}")
+
+        updateBoard(st=x[0])
 
 def updateBoard(st):
     while "/" in st:
@@ -80,5 +105,4 @@ def updateBoard(st):
     for i in range(0,len(n)):
         matrix.board[i] = n[i]
 
-#settable("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
-#rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+        

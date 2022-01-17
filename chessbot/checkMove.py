@@ -123,13 +123,16 @@ def isKingValid(toPlace, fromPlace, id):
         if fromPlace - toPlace == 9 or fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
             if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
                 settable.kingmoves[color] += 1
+                settable.rookmoves[color * 2 : color * 2 + 1] = 1
                 return True
         if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
             if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
                 settable.kingmoves[color] += 1
+                settable.rookmoves[color * 2 : color * 2 + 1] = 1
                 return True
         if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
             settable.kingmoves[color] += 1
+            settable.rookmoves[color * 2 : color * 2 + 1] = 1
             return True
         return False
 
