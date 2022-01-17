@@ -26,6 +26,15 @@ def getInput():
         id = matrix.board[matrix.idboard.index(pos1)]
         print(f"{id}, {pos1}, {pos2}")
         if(pos1 != pos2 and checkMove.moveChecker(fromPlace=pos1, toPlace=pos2, id=id) == True):
+            #t
+            if pos2 == 1:
+                settable.rookmoves[0] = 1
+            if pos2 == 8:
+                settable.rookmoves[1] = 1
+            if pos2 == 57:
+                settable.rookmoves[2] = 1
+            if pos2 == 64:
+                settable.rookmoves[3] = 1
             print(f"{id}, {pos1}, {pos2}")
             matrix.board[matrix.idboard.index(pos1)] = "."
             matrix.board[matrix.idboard.index(pos2)] = id
