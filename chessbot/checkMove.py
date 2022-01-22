@@ -200,7 +200,8 @@ def isPawnVaild(toPlace, fromPlace, id, n):
             return True
         for x in range(0, 8):
             if(fromPlace == 49 + x and fromPlace - toPlace == 16):
-                return True
+                if matrix.board[fromPlace + 8 -1] == "." and matrix.board[toPlace -1] == ".":
+                    return True
         return False
     if id == "p" and (matrix.board[toPlace - 1] == "." or matrix.board[toPlace - 1].upper() == matrix.board[toPlace - 1]):
         if(fromPlace - toPlace == -8):
@@ -213,7 +214,8 @@ def isPawnVaild(toPlace, fromPlace, id, n):
             return True
         for x in range(0, 8):
             if(fromPlace == 9 + x and fromPlace - toPlace == -16):
-                return True
+                if matrix.board[fromPlace - 8 -1] == "." and matrix.board[toPlace -1] == ".":
+                    return True
 
 def rookEdgeCheck(f, t):
     if(t>f):
