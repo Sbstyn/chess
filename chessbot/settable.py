@@ -6,6 +6,8 @@ turn = [0]
 kingmoves = [0,0]
 #bl br wl wr
 rookmoves = [0,0,0,0]
+#able to move to
+enpassant = [0]
 
 def settable(st):
     kingmoves[0] = 0
@@ -15,6 +17,10 @@ def settable(st):
         updateBoard(st=st)
         st = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
         updateBoard(st=st)
+        for s in range(0, len(rookmoves)):
+            rookmoves[s] = 0
+        for s in range(0, len(kingmoves)):
+            kingmoves[s] = 0
     elif st == "fen":
         zer = False
         z = 0
@@ -58,6 +64,8 @@ def settable(st):
         a += f" {t} {cas}"
         print(a)
         
+    elif st == "movesdata":
+        print(kingmoves, rookmoves)
     elif st == "clear":
         st = "8" * 8
         updateBoard(st=st)
