@@ -6,6 +6,7 @@
 #queen      Q       q
 #king       K       k
 
+import re
 import settable
 import matrix
 
@@ -184,6 +185,19 @@ def isPawnPromotionVaild(toPlace, fromPlace, id, n):
                 return True
     return False
 
+def pawnAttackEdgeCheck(f):
+    fx = 0
+    for x in range(1, 9):
+        for y in range(0, 8):
+            if(f == x + y * 8):
+                fx = x
+    if fx == 1:
+        return 1
+    if fx == 8:
+        return -1
+    else:
+        return 0
+
 def isPawnVaild(toPlace, fromPlace, id, n):
     if n == None:
         for x in range(0,8):
@@ -197,9 +211,18 @@ def isPawnVaild(toPlace, fromPlace, id, n):
             else:
                 return False
         if ((fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace - 1] != ".") or (toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9):
-            if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
-                matrix.board[toPlace +8 -1] = "."
-            return True
+            if pawnAttackEdgeCheck(fromPlace) == 0:
+                if toPlace == settable.enpassant[0] and fromPlace - toPlace == 7 or fromPlace - toPlace == 9:
+                    matrix.board[toPlace +8 -1] = "."
+                return True
+            elif pawnAttackEdgeCheck(fromPlace) == 1 and fromPlace - toPlace == 9:
+                if toPlace == settable.enpassant[0] and fromPlace - toPlace == 7 or fromPlace - toPlace == 9:
+                    matrix.board[toPlace +8 -1] = "."
+                return True
+            elif pawnAttackEdgeCheck(fromPlace) == -1 and fromPlace - toPlace == 7:
+                if toPlace == settable.enpassant[0] and fromPlace - toPlace == 7 or fromPlace - toPlace == 9:
+                    matrix.board[toPlace +8 -1] = "."
+                return True
         for x in range(0, 8):
             if(fromPlace == 49 + x and fromPlace - toPlace == 16):
                 #print(matrix.board[fromPlace - 8 -1], matrix.board[toPlace -1])
@@ -217,9 +240,18 @@ def isPawnVaild(toPlace, fromPlace, id, n):
             else:
                 return False
         if ((fromPlace - toPlace == -7 or fromPlace - toPlace == -9) and matrix.board[toPlace - 1] != ".") or (toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9):
-            if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
-                matrix.board[toPlace -8 -1] = "."
-            return True
+            if pawnAttackEdgeCheck(fromPlace) == 0:
+                if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
+                    matrix.board[toPlace -8 -1] = "."
+                return True
+            elif pawnAttackEdgeCheck(fromPlace) == 1 and fromPlace - toPlace == -7:
+                if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
+                    matrix.board[toPlace -8 -1] = "."
+                return True
+            elif pawnAttackEdgeCheck(fromPlace) == -1 and fromPlace - toPlace == -9:
+                if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
+                    matrix.board[toPlace -8 -1] = "."
+                return True
         for x in range(0, 8):
             if(fromPlace == 9 + x and fromPlace - toPlace == -16):
                 if matrix.board[fromPlace + 8 -1] == "." and matrix.board[toPlace -1] == ".":
