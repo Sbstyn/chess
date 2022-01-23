@@ -65,7 +65,7 @@ def settable(st):
         print(a)
         
     elif st == "movesdata":
-        print(kingmoves, rookmoves)
+        print(kingmoves, rookmoves, enpassant)
     elif st == "clear":
         st = "8" * 8
         updateBoard(st=st)

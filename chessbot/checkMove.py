@@ -196,11 +196,17 @@ def isPawnVaild(toPlace, fromPlace, id, n):
                 return True
             else:
                 return False
-        if (fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace - 1] != ".":
+        if ((fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace - 1] != ".") or (toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9):
+            if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
+                matrix.board[toPlace +8 -1] = "."
             return True
         for x in range(0, 8):
             if(fromPlace == 49 + x and fromPlace - toPlace == 16):
-                if matrix.board[fromPlace + 8 -1] == "." and matrix.board[toPlace -1] == ".":
+                #print(matrix.board[fromPlace - 8 -1], matrix.board[toPlace -1])
+                if matrix.board[fromPlace - 8 -1] == "." and matrix.board[toPlace -1] == ".":
+                    print(matrix.board[toPlace -1 -1], matrix.board[toPlace +1 -1])
+                    if matrix.board[toPlace - 1 -1] == "p" or matrix.board[toPlace + 1 -1] == "p":
+                        settable.enpassant[0] = fromPlace - 8
                     return True
         return False
     if id == "p" and (matrix.board[toPlace - 1] == "." or matrix.board[toPlace - 1].upper() == matrix.board[toPlace - 1]):
@@ -210,11 +216,15 @@ def isPawnVaild(toPlace, fromPlace, id, n):
                 return True
             else:
                 return False
-        if (fromPlace - toPlace == -7 or fromPlace - toPlace == -9) and matrix.board[toPlace - 1] != ".":
+        if ((fromPlace - toPlace == -7 or fromPlace - toPlace == -9) and matrix.board[toPlace - 1] != ".") or (toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9):
+            if toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9:
+                matrix.board[toPlace -8 -1] = "."
             return True
         for x in range(0, 8):
             if(fromPlace == 9 + x and fromPlace - toPlace == -16):
-                if matrix.board[fromPlace - 8 -1] == "." and matrix.board[toPlace -1] == ".":
+                if matrix.board[fromPlace + 8 -1] == "." and matrix.board[toPlace -1] == ".":
+                    if matrix.board[toPlace - 1 -1] == "p" or matrix.board[toPlace + 1 -1] == "p":
+                        settable.enpassant[0] = fromPlace + 8
                     return True
 
 def rookEdgeCheck(f, t):
