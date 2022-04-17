@@ -211,15 +211,16 @@ def isPawnVaild(toPlace, fromPlace, id, n):
             else:
                 return False
         if ((fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace - 1] != ".") or (toPlace == settable.enpassant[0] and fromPlace - toPlace == -7 or fromPlace - toPlace == -9):
+            print(pawnAttackEdgeCheck(fromPlace),fromPlace - toPlace)
             if pawnAttackEdgeCheck(fromPlace) == 0:
                 if toPlace == settable.enpassant[0] and fromPlace - toPlace == 7 or fromPlace - toPlace == 9:
                     matrix.board[toPlace +8 -1] = "."
                 return True
-            elif pawnAttackEdgeCheck(fromPlace) == 1 and fromPlace - toPlace == 9:
+            elif pawnAttackEdgeCheck(fromPlace) == 1 and fromPlace - toPlace == 7:
                 if toPlace == settable.enpassant[0] and fromPlace - toPlace == 7 or fromPlace - toPlace == 9:
                     matrix.board[toPlace +8 -1] = "."
                 return True
-            elif pawnAttackEdgeCheck(fromPlace) == -1 and fromPlace - toPlace == 7:
+            elif pawnAttackEdgeCheck(fromPlace) == -1 and fromPlace - toPlace == 9:
                 if toPlace == settable.enpassant[0] and fromPlace - toPlace == 7 or fromPlace - toPlace == 9:
                     matrix.board[toPlace +8 -1] = "."
                 return True
