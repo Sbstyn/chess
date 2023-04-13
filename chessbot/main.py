@@ -1,6 +1,7 @@
 import checkMove
 import matrix
-import settable
+import commands
+from math import floor
 
 """
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
@@ -19,7 +20,7 @@ def start():
         i = input()
 
         if i[0] == "-":
-            settable.settable(i[1:])
+            commands.prompt(i[1:])
         elif(len(i) == 4):
             pos1 = aray.index(i[0]) + 1 + (56 - 8 * (int(i[1]) - 1))
             pos2 = aray.index(i[2]) + 1 + (56 - 8 * (int(i[3]) - 1))
@@ -29,16 +30,23 @@ def start():
             if(pos1 != pos2 and checkMove.moveChecker(fromPlace=pos1, toPlace=pos2, id=id) == True):
                 #t
                 if pos2 == 1:
-                    settable.rookmoves[0] = 1
+                    commands.rookmoves[0] = 1
                 if pos2 == 8:
-                    settable.rookmoves[1] = 1
+                    commands.rookmoves[1] = 1
                 if pos2 == 57:
-                    settable.rookmoves[2] = 1
+                    commands.rookmoves[2] = 1
                 if pos2 == 64:
-                    settable.rookmoves[3] = 1
+                    commands.rookmoves[3] = 1
                 print(f"{id}, {pos1}, {pos2}")
                 matrix.board[matrix.idboard.index(pos1)] = "."
                 matrix.board[matrix.idboard.index(pos2)] = id
+
+                commands.moves += 1
+                commands.clock = floor(commands.moves / 2) + 1
+                if commands.clock % 2 == 0:
+                    commands.turn = "w"
+                else:
+                    commands.turn = "b"
             else:
                 print("Error code: 1")
         
@@ -56,7 +64,7 @@ def start():
             else:
                 print("MoveNotLegal")
 
-        #print(settable.kingmoves[0])
+        #print(commands.kingmoves[0])
         
         matrix.pBoard()
         getInput()
