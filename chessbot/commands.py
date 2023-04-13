@@ -2,7 +2,11 @@ import matrix
 #from checkMove import checkIfSquareAttacked
 
 #0:w 1:b
-turn = [0]
+moves = 0
+#moves/2
+clock = 0
+
+turn = "w"
 #bw
 kingmoves = [0,0]
 #bl br wl wr
@@ -10,10 +14,9 @@ rookmoves = [0,0,0,0]
 #able to move to
 enpassant = [0]
 
-def settable(st):
-    kingmoves[0] = 0
+def prompt(st):
     st = str(st)
-    if st == "set":
+    if st == "set" or st == "s":
         st = "8" * 8
         updateBoard(st=st)
         st = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
@@ -47,11 +50,6 @@ def settable(st):
             x += 1
         a = a[:-1]
 
-        if turn[0] == 1:
-            t = "b"
-        else:
-            t = "w"
-
         cas = ""
         if rookmoves[3] == 0:
             cas += "K"
@@ -62,30 +60,30 @@ def settable(st):
         if rookmoves[0] == 0:
             cas += "q"
 
-        a += f" {t} {cas}"
+        a += f" {turn} {cas} {enpassant[0]} {clock}"
         print(a)
         
-    elif st == "movesdata":
+    elif st == "movesdata" or st == "md":
         print(kingmoves, rookmoves, enpassant)
     
     #elif st == "att" or st == "attackedsquares":
     #    print(checkIfSquareAttacked("w"), checkIfSquareAttacked("b"), sep="\n")
 
-    elif st == "stop" or st == "q":
+    elif st == "quit" or st == "q":
         quit()
 
     elif st == "clear":
         st = "8" * 8
         updateBoard(st=st)
         
-    elif st.split()[0] == "set":
+    elif st.split()[0] == "set" or st.split()[0] == "s":
         x = st.split()[1:]
         print(x)
 
         if(x[1] == "b"):
-            turn[0] = 1
+            clock[0] = 1
         else:
-            turn[0] = 0
+            clock[0] = 0
 
         for i in range(0, 4):
             rookmoves[i] = 1
@@ -102,6 +100,9 @@ def settable(st):
         print(f"{x[2]} {st} {rookmoves}")
 
         updateBoard(st=x[0])
+
+    else:
+        print("Move not found...")
 
 def updateBoard(st):
     while "/" in st:
