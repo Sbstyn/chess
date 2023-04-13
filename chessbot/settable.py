@@ -1,4 +1,5 @@
 import matrix
+#from checkMove import checkIfSquareAttacked
 
 #0:w 1:b
 turn = [0]
@@ -66,14 +67,19 @@ def settable(st):
         
     elif st == "movesdata":
         print(kingmoves, rookmoves, enpassant)
+    
+    #elif st == "att" or st == "attackedsquares":
+    #    print(checkIfSquareAttacked("w"), checkIfSquareAttacked("b"), sep="\n")
+
+    elif st == "stop" or st == "q":
+        quit()
+
     elif st == "clear":
         st = "8" * 8
         updateBoard(st=st)
         
-    elif st[0] == "x":
-        st = st[1:]
-
-        x = st.split()
+    elif st.split()[0] == "set":
+        x = st.split()[1:]
         print(x)
 
         if(x[1] == "b"):
