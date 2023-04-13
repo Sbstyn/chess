@@ -6,20 +6,22 @@
 #queen      Q       q
 #king       K       k
 
-import settable
+import commands
 import matrix
 
-def moveChecker(toPlace, fromPlace, id):
+def moveChecker(toPlace, fromPlace, id : str):
+    if (id.isupper() and not commands.turn == "w") or (not id.isupper() and not commands.turn == "b"):
+        return False
     if id == "R" or id == "r":
         if isRookValid(toPlace, fromPlace, id):
             if fromPlace == 1:
-                settable.rookmoves[0] = 1
+                commands.rookmoves[0] = 1
             if fromPlace == 8:
-                settable.rookmoves[1] = 1
+                commands.rookmoves[1] = 1
             if fromPlace == 57:
-                settable.rookmoves[2] = 1
+                commands.rookmoves[2] = 1
             if fromPlace == 64:
-                settable.rookmoves[3] = 1
+                commands.rookmoves[3] = 1
             return True
         else:
             return False
@@ -98,54 +100,58 @@ def isKingValid(toPlace, fromPlace, id):
         return False
     
     else:
-        if settable.kingmoves[color] == 0 and color == 1:
+        if commands.kingmoves[color] == 0 and color == 1:
             print("w", end="")
-            if toPlace == 63 and settable.rookmoves[3] == 0 and matrix.board[62 - 1] == "." and matrix.board[63 - 1] == ".":
+            if toPlace == 63 and commands.rookmoves[3] == 0 and matrix.board[62 - 1] == "." and matrix.board[63 - 1] == ".":
                 print("s")
                 matrix.board[64 - 1] = "."
                 matrix.board[62 - 1] = "R"
+                commands.kingmoves[color] += 1
                 return True
-            if toPlace == 59 and settable.rookmoves[2] == 0 and matrix.board[60 - 1] == "." and matrix.board[59 - 1] == "." and matrix.board[58 - 1] == ".":
+            if toPlace == 59 and commands.rookmoves[2] == 0 and matrix.board[60 - 1] == "." and matrix.board[59 - 1] == "." and matrix.board[58 - 1] == ".":
                 print("l")
                 matrix.board[57 - 1] = "."
                 matrix.board[60 - 1] = "R"
+                commands.kingmoves[color] += 1
                 return True
-        if settable.kingmoves[color] == 0 and color == 0:
+        if commands.kingmoves[color] == 0 and color == 0:
             print("b", end="")
-            if toPlace == 7 and settable.rookmoves[1] == 0 and matrix.board[6 - 1] == "." and matrix.board[7 - 1] == ".":
+            if toPlace == 7 and commands.rookmoves[1] == 0 and matrix.board[6 - 1] == "." and matrix.board[7 - 1] == ".":
                 print("s")
                 matrix.board[8 - 1] = "."
                 matrix.board[6 - 1] = "r"
+                commands.kingmoves[color] += 1
                 return True
-            if toPlace == 3 and settable.rookmoves[0] == 0 and matrix.board[2 - 1] == "." and matrix.board[3 - 1] == "." and matrix.board[4 - 1] == ".":
+            if toPlace == 3 and commands.rookmoves[0] == 0 and matrix.board[2 - 1] == "." and matrix.board[3 - 1] == "." and matrix.board[4 - 1] == ".":
                 print("l")
                 matrix.board[1 - 1] = "."
                 matrix.board[4 - 1] = "r"
+                commands.kingmoves[color] += 1
                 return True
         print(f"-   {kingEdgeCheck(t=toPlace,f=fromPlace)}")
         if fromPlace - toPlace == 9 or fromPlace - toPlace == 1 or fromPlace - toPlace == -7:
             if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
-                settable.kingmoves[color] += 1
-                settable.rookmoves[color * 2] = 1
-                settable.rookmoves[color * 2 + 1] = 1
+                commands.kingmoves[color] += 1
+                commands.rookmoves[color * 2] = 1
+                commands.rookmoves[color * 2 + 1] = 1
                 return True
         if fromPlace - toPlace == -9 or fromPlace - toPlace == -1 or fromPlace - toPlace == 7:
             if kingEdgeCheck(t=toPlace,f=fromPlace) > 1:
-                settable.kingmoves[color] += 1
-                settable.rookmoves[color * 2] = 1
-                settable.rookmoves[color * 2 + 1] = 1
+                commands.kingmoves[color] += 1
+                commands.rookmoves[color * 2] = 1
+                commands.rookmoves[color * 2 + 1] = 1
                 return True
         if fromPlace - toPlace == 8 or fromPlace - toPlace == -8:
-            settable.kingmoves[color] += 1
-            settable.rookmoves[color * 2] = 1
-            settable.rookmoves[color * 2 + 1] = 1
+            commands.kingmoves[color] += 1
+            commands.rookmoves[color * 2] = 1
+            commands.rookmoves[color * 2 + 1] = 1
             return True
 
-        """if fromPlace == 61 and settable.kingmoves[0] == 0 and settable.castle[0] == 1:
+        """if fromPlace == 61 and commands.kingmoves[0] == 0 and commands.castle[0] == 1:
             matrix.board[matrix.idboard.index(pos1)] = "."
             matrix.board[matrix.idboard.index(pos2)] = i[4]
             return True
-        if fromPlace == 61 and settable.kingmoves[0] == 0 and settable.castle[1] == 1:
+        if fromPlace == 61 and commands.kingmoves[0] == 0 and commands.castle[1] == 1:
             return True"""
         return False
 
