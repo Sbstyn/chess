@@ -140,6 +140,13 @@ def isKingValid(toPlace, fromPlace, id):
             settable.rookmoves[color * 2] = 1
             settable.rookmoves[color * 2 + 1] = 1
             return True
+
+        """if fromPlace == 61 and settable.kingmoves[0] == 0 and settable.castle[0] == 1:
+            matrix.board[matrix.idboard.index(pos1)] = "."
+            matrix.board[matrix.idboard.index(pos2)] = i[4]
+            return True
+        if fromPlace == 61 and settable.kingmoves[0] == 0 and settable.castle[1] == 1:
+            return True"""
         return False
 
 def isQueenValid(toPlace, fromPlace, id):
