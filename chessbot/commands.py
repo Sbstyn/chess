@@ -14,6 +14,8 @@ rookmoves = [0,0,0,0]
 #able to move to
 enpassant = [0]
 
+aray = ["a", "b", "c", "d", "e", "f", "g", "h"]
+
 def prompt(st):
     st = str(st)
     if st == "set" or st == "s":
@@ -80,10 +82,9 @@ def prompt(st):
         x = st.split()[1:]
         print(x)
 
-        if(x[1] == "b"):
-            clock[0] = 1
-        else:
-            clock[0] = 0
+        #clock
+
+        if x[3] != "-": enpassant[0] = aray.index(x[3][0]) + 1 + (56 - 8 * (int(x[3][1]) - 1))
 
         for i in range(0, 4):
             rookmoves[i] = 1

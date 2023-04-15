@@ -2,7 +2,7 @@ import matrix
 import checkMove
 
 #square id!
-
+#végigloopol az összes másik coloron és checkolja hogy tud e odalépni ahová a király akarna
 def checkIfSquareAttacked(attackedBy):
     sq_a = []
     for i in range(0, len(matrix.board)):

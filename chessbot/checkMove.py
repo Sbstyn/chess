@@ -214,13 +214,26 @@ def pawnEdgeCheck(f,t):
     else:
         return False
 
-def isPawnVaild(toPlace, fromPlace, id, n):
+def isPawnVaild(toPlace, fromPlace, id, n, onlyAttack = False):
     if n == None:
         for x in range(0,8):
             if toPlace == x + 1 or toPlace == x + 57:
                 return False
+            
+    if (fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and matrix.board[toPlace - 1] == "." and commands.enpassant[0] == toPlace:
+        print("np1", toPlace - 1 + 8, matrix.board[toPlace - 1 + 8])
+        if pawnEdgeCheck(fromPlace, toPlace):
+            matrix.board[toPlace - 1 + 8] = "."
+            return True
+    
+    if (fromPlace - toPlace == -7 or fromPlace - toPlace == -9) and matrix.board[toPlace - 1] == "." and commands.enpassant[0] == toPlace:
+        print("np2", toPlace - 1 - 8)
+        if pawnEdgeCheck(fromPlace, toPlace):
+            matrix.board[toPlace - 1 - 8] = "."
+            return True
+
     if id == "P" and (matrix.board[toPlace - 1] == "." or matrix.board[toPlace - 1].lower() == matrix.board[toPlace - 1]):
-        if(fromPlace - toPlace == 8):
+        if(fromPlace - toPlace == 8) and not onlyAttack:
             if matrix.board[toPlace - 1] == ".":
                 print(matrix.board[toPlace - 1])
                 return True
@@ -229,11 +242,13 @@ def isPawnVaild(toPlace, fromPlace, id, n):
         if (fromPlace - toPlace == 7 or fromPlace - toPlace == 9) and (matrix.board[toPlace - 1] != "." and matrix.board[toPlace - 1] == matrix.board[toPlace - 1].lower()):
             return pawnEdgeCheck(fromPlace, toPlace)
         for x in range(0, 8):
-            if(fromPlace == 49 + x and fromPlace - toPlace == 16):
+            if(fromPlace == 49 + x and fromPlace - toPlace == 16) and not onlyAttack:
+                if matrix.board[toPlace - 1 + 1] == "p" or matrix.board[toPlace - 1 - 1] == "p":
+                    commands.enpassant[0] = toPlace + 8
                 return True
         return False
     if id == "p" and (matrix.board[toPlace - 1] == "." or matrix.board[toPlace - 1].upper() == matrix.board[toPlace - 1]):
-        if(fromPlace - toPlace == -8):
+        if(fromPlace - toPlace == -8) and not onlyAttack:
             if matrix.board[toPlace - 1] == ".":
                 print(matrix.board[toPlace - 1])
                 return True
@@ -242,7 +257,9 @@ def isPawnVaild(toPlace, fromPlace, id, n):
         if (fromPlace - toPlace == -7 or fromPlace - toPlace == -9) and (matrix.board[toPlace - 1] != "." and matrix.board[toPlace - 1] == matrix.board[toPlace - 1].upper()):
             return pawnEdgeCheck(fromPlace, toPlace)
         for x in range(0, 8):
-            if(fromPlace == 9 + x and fromPlace - toPlace == -16):
+            if(fromPlace == 9 + x and fromPlace - toPlace == -16) and not onlyAttack:
+                if matrix.board[toPlace - 1 + 1] == "P" or matrix.board[toPlace - 1 - 1] == "P":
+                    commands.enpassant[0] = toPlace + 8
                 return True
 
 def rookEdgeCheck(f, t):
